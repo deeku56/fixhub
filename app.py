@@ -276,6 +276,16 @@ def verify_identity():
 @app.route("/static/<path:filename>")
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
+@app.route("/reset-db")
+def reset_db():
+    try:
+        Upvote.query.delete()
+        Issue.query.delete()
+        db.session.commit()
+        return "✅ All issues and upvotes have been reset on Render!"
+    except Exception as e:
+        return f"❌ Failed to reset: {str(e)}"
+
 
 # === Run App ===
 if __name__ == "__main__":
