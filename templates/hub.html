@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FixHub</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}?v={{ time }}">
-
-  <!-- ✅ Leaflet.js for Interactive Maps -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
-
 <body>
+
   <header class="hero">
     <h1>FixHub</h1>
     <p>Helping You Build a Better Neighbourhood</p>
   </header>
 
-  <!-- 🚨 Guidelines Section -->
   <section class="guidelines">
     <h2>🚨 Community Guidelines</h2>
     <div class="guidelines-card">
@@ -40,31 +37,21 @@
     <a href="#" onclick="logout()" style="float: right; color: red; font-weight: bold;">Logout</a>
   </nav>
 
-  <!-- ✅ About -->
   <section id="about" class="about">
     <h2>About FixHub</h2>
     <p>FixHub is a community-driven civic issue reporting platform. Whether it's a broken light, a pothole, or a sanitation issue, we help your voice reach those who can act on it.</p>
   </section>
 
-  <!-- ✅ Features -->
   <section id="features" class="features">
-  <h2>Our Core Features</h2>
-  <div class="cards">
-    <div class="card"><h3>Quick Issue Reporting</h3><p>Report local issues in seconds using our guided form.</p></div>
-    <div class="card"><h3>Real-Time Status</h3><p>Track your issue from submission to resolution.</p></div>
-    <div class="card"><h3>Community Priority</h3><p>Upvote issues that matter most to your neighborhood.</p></div>
-    <div class="card"><h3>Transparency</h3><p>Stay informed. FixHub makes local governance more accountable.</p></div>
-
-    <!-- ✅ Your New Card -->
-    <div class="card">
-      <h3>Official Issue Management</h3>
-      <p>Government officials can log in to review and update issue statuses in real time.</p>
+    <h2>Our Core Features</h2>
+    <div class="cards">
+      <div class="card"><h3>Quick Issue Reporting</h3><p>Report local issues in seconds using our guided form.</p></div>
+      <div class="card"><h3>Real-Time Status</h3><p>Track your issue from submission to resolution.</p></div>
+      <div class="card"><h3>Community Priority</h3><p>Upvote issues that matter most to your neighborhood.</p></div>
+      <div class="card"><h3>Transparency</h3><p>Stay informed. FixHub makes local governance more accountable.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-  <!-- ✅ Report Section -->
   <section id="report" class="report">
     <h2>Report an Issue (with ID Verification)</h2>
 
@@ -87,15 +74,8 @@
       <label for="location">Location:</label>
       <input type="text" id="location" placeholder="Type manually OR select from the map" required />
 
-      <!-- 🕓 Map Loading Instruction -->
-      <p id="map-hint" style="font-size: 0.95rem; color: #666; margin-bottom: 0.5rem;">
-        🕓 If the map loads slowly, try dragging it to load tiles faster.
-      </p>
-
-      <!-- ✅ Interactive Map for Location Selection -->
       <div id="map" style="height: 400px; width: 100%;"></div>
 
-      <!-- ✅ Hidden inputs to store selected coordinates -->
       <input type="hidden" id="lat" name="latitude">
       <input type="hidden" id="lng" name="longitude">
 
@@ -112,7 +92,6 @@
     </form>
   </section>
 
-  <!-- ✅ Track Issues -->
   <section id="track" class="track">
     <h2>Track Issues</h2>
     <p class="disclaimer">
@@ -120,12 +99,11 @@
       If it does, <strong>upvote</strong> it to help prioritize.<br/>
       If it's a new issue, fill out the form above to submit it.
     </p>
-    <div id="issue-list" class="cards"> 
+    <div id="issue-list" class="cards">
       <!-- Issues will be added dynamically here -->
     </div>
   </section>
 
-  <!-- ✅ FAQ Section -->
   <section id="faq" class="faq">
     <h2>Frequently Asked Questions</h2>
 
@@ -148,14 +126,42 @@
         Simply submit a report with a description, images, and location using our interactive map.
       </div>
     </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">Who can access and respond to reported issues?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Verified government or official personnel can log in and update the status of issues based on ground action taken.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">Can I upvote issues raised by others?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes! If you see an issue that affects your neighborhood, you can upvote it once to help prioritize it.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">How do I reset my password?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        On the login page, click “Forgot Password?”, enter your email and a new password to reset it instantly.
+      </div>
+    </div>
   </section>
 
-  <!-- ✅ Footer -->
   <footer>
     <p>&copy; 2025 FixHub. Together, we fix better.</p>
   </footer>
 
-  <!-- ✅ JavaScript -->
   <script src="{{ url_for('static', filename='hub.js') }}"></script>
 </body>
 </html>
