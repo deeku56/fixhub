@@ -1,10 +1,45 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, send_from_directory
 import os
 import difflib
+import json
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from test_vision import extract_text, extract_name_and_dob
+
+# ✅ Google Vision API (load from env)
+from google.cloud import vision
+from google.oauth2 import service_account
+
+def get_vision_client():
+    try:
+        credentials_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+        if not credentials_json:
+            raise ValueError("GOOGLE_APPLICATION_CREDENTIALS_JSON is not set.")
+        credentials_dict = json.loads(credentials_json)
+        credentials = service_account.Credentials.from_service_account_info(credentials_dict)
+        return vision.ImageAnnotatorClient(credentials=credentials)
+    except Exception as e:
+        print("❌ Failed to initialize Vision API client:", e)
+        return None
+
+client = get_vision_client()
+
+def extract_text(image_path):
+    if not client:
+        return ""
+    with open(image_path, "rb") as image_file:
+        content = image_file.read()
+    image = vision.Image(content=content)
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    return texts[0].description if texts else ""
+
+def extract_name_and_dob(text):
+    # 🔎 Dummy parser (simplified)
+    lines = text.splitlines()
+    name = lines[0] if lines else "UNKNOWN"
+    dob = next((line for line in lines if "199" in line or "200" in line), "UNKNOWN")
+    return name.strip(), dob.strip()
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = 'your_secret_key_here'
@@ -244,5 +279,6 @@ def serve_static(filename):
 
 # === Run App ===
 if __name__ == "__main__":
-    print("🚀 Starting FixHub server on http://127.0.0.1:5000")
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"🚀 Starting FixHub server on 0.0.0.0:{port}")
+    app.run(host="0.0.0.0", port=port, debug=True)
