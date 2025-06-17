@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track Issues | FixHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+</head>
+<body>
+
+  <!-- ✅ Dropdown Navbar -->
+  <nav class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">☰</button>
+      <div class="dropdown-content">
+        <a href="/">Home</a>
+        <a href="/features">Features</a>
+        <a href="/report">Report</a>
+        <a href="/faq">FAQ</a>
+        <a href="/login" style="color: red;">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>📍 Track Issues</h1>
+    <p>See what's already reported and support by upvoting</p>
+  </header>
+
+  <section class="track">
+    <p class="disclaimer">
+      ⚠️ <strong>Before reporting:</strong> Check if your issue is already listed.<br>
+      If yes, <strong>upvote</strong> it to help prioritize. If not, go to the Report page and submit it.
+    </p>
+
+    <div id="issue-list" class="cards">
+      <!-- Dynamic issue cards will be inserted by hub.js -->
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FixHub. Together, we fix better.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='hub.js') }}"></script>
+</body>
+</html>

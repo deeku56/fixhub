@@ -2,18 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FixHub</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}?v={{ time }}">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <title>FixHub - Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
 </head>
 <body>
+  <nav class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">☰</button>
+      <div class="dropdown-content">
+        <a href="/features">Features</a>
+        <a href="/report">Report</a>
+        <a href="/track">Track</a>
+        <a href="/faq">FAQ</a>
+        <a href="/login" style="color:red">Logout</a>
+      </div>
+    </div>
+  </nav>
 
   <header class="hero">
     <h1>FixHub</h1>
     <p>Helping You Build a Better Neighbourhood</p>
   </header>
+
+  <section class="about">
+    <h2>About FixHub</h2>
+    <p>FixHub is a community-driven civic issue reporting platform. Whether it's a broken light, a pothole, or a sanitation issue, we help your voice reach those who can act on it.</p>
+  </section>
 
   <section class="guidelines">
     <h2>🚨 Community Guidelines</h2>
@@ -28,140 +42,6 @@
     </div>
   </section>
 
-  <nav class="navbar">
-    <a href="#about">About</a>
-    <a href="#features">Features</a>
-    <a href="#report">Report</a>
-    <a href="#track">Track</a>
-    <a href="#faq">FAQ</a>
-    <a href="#" onclick="logout()" style="float: right; color: red; font-weight: bold;">Logout</a>
-  </nav>
-
-  <section id="about" class="about">
-    <h2>About FixHub</h2>
-    <p>FixHub is a community-driven civic issue reporting platform. Whether it's a broken light, a pothole, or a sanitation issue, we help your voice reach those who can act on it.</p>
-  </section>
-
-  <section id="features" class="features">
-    <h2>Our Core Features</h2>
-    <div class="cards">
-      <div class="card"><h3>Quick Issue Reporting</h3><p>Report local issues in seconds using our guided form.</p></div>
-      <div class="card"><h3>Real-Time Status</h3><p>Track your issue from submission to resolution.</p></div>
-      <div class="card"><h3>Community Priority</h3><p>Upvote issues that matter most to your neighborhood.</p></div>
-      <div class="card"><h3>Transparency</h3><p>Stay informed. FixHub makes local governance more accountable.</p></div>
-    </div>
-  </section>
-
-  <section id="report" class="report">
-    <h2>Report an Issue (with ID Verification)</h2>
-
-    <form id="verify-form" enctype="multipart/form-data" novalidate>
-      <label>Upload Aadhaar Image:</label>
-      <input type="file" name="aadhar" accept="image/*" required />
-      <label>Upload Second Proof (Voter ID, License, etc.):</label>
-      <input type="file" name="other_id" accept="image/*" required />
-      <button type="submit">Verify Identity</button>
-      <p id="verify-status"></p>
-    </form>
-
-    <form id="report-form" style="display: none;">
-      <label for="title">Issue Title:</label>
-      <input type="text" id="title" placeholder="Issue Title (e.g., Pothole on 4th Street)" required />
-
-      <label for="description">Describe the Issue:</label>
-      <textarea id="description" placeholder="Describe the issue..." maxlength="250" required></textarea>
-
-      <label for="location">Location:</label>
-      <input type="text" id="location" placeholder="Type manually OR select from the map" required />
-
-      <div id="map" style="height: 400px; width: 100%;"></div>
-
-      <input type="hidden" id="lat" name="latitude">
-      <input type="hidden" id="lng" name="longitude">
-
-      <label for="category">Category:</label>
-      <select id="category" required>
-        <option value="">Select Category</option>
-        <option value="pothole">Pothole</option>
-        <option value="light">Streetlight</option>
-        <option value="garbage">Garbage</option>
-        <option value="sanitation">Sanitation</option>
-      </select>
-
-      <button type="submit">Submit Report</button>
-    </form>
-  </section>
-
-  <section id="track" class="track">
-    <h2>Track Issues</h2>
-    <p class="disclaimer">
-      ⚠️ <strong>Before reporting:</strong> Please check if your issue already exists below.<br/>
-      If it does, <strong>upvote</strong> it to help prioritize.<br/>
-      If it's a new issue, fill out the form above to submit it.
-    </p>
-    <div id="issue-list" class="cards">
-      <!-- Issues will be added dynamically here -->
-    </div>
-  </section>
-
-  <section id="faq" class="faq">
-    <h2>Frequently Asked Questions</h2>
-
-    <div class="faq-item">
-      <div class="faq-header">
-        <span class="faq-question">What is FixHub?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-answer">
-        FixHub is a community-driven platform where citizens can report local issues like potholes, broken streetlights, and garbage.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-header">
-        <span class="faq-question">How do I report an issue?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-answer">
-        Simply submit a report with a description, images, and location using our interactive map.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-header">
-        <span class="faq-question">Who can access and respond to reported issues?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-answer">
-        Verified government or official personnel can log in and update the status of issues based on ground action taken.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-header">
-        <span class="faq-question">Can I upvote issues raised by others?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-answer">
-        Yes! If you see an issue that affects your neighborhood, you can upvote it once to help prioritize it.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-header">
-        <span class="faq-question">How do I reset my password?</span>
-        <span class="faq-toggle">+</span>
-      </div>
-      <div class="faq-answer">
-        On the login page, click “Forgot Password?”, enter your email and a new password to reset it instantly.
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 FixHub. Together, we fix better.</p>
-  </footer>
-
-  <script src="{{ url_for('static', filename='hub.js') }}"></script>
+  <footer><p>&copy; 2025 FixHub</p></footer>
 </body>
 </html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ | FixHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+</head>
+<body>
+
+  <!-- ✅ Dropdown Navbar -->
+  <nav class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">☰</button>
+      <div class="dropdown-content">
+        <a href="/">Home</a>
+        <a href="/features">Features</a>
+        <a href="/report">Report</a>
+        <a href="/track">Track</a>
+        <a href="/login" style="color: red;">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>❓ Frequently Asked Questions</h1>
+    <p>We're here to help clarify your doubts</p>
+  </header>
+
+  <section class="faq">
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">What is FixHub?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        FixHub is a community-driven platform for reporting local civic issues like potholes, garbage, and streetlight failures.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">How do I report an issue?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        First verify your ID, then fill in the issue details, select a location on the map, and submit.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">Can I track my submitted issues?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Yes, go to the “Track” section to see your issue’s current status and community upvotes.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">Who updates the status of issues?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Government officials or authorized personnel can log in and update the issue status directly.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">Why do I need to verify identity?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        To prevent spam, fake issues, and ensure that only genuine citizens can report and upvote civic problems.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FixHub. Together, we fix better.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='hub.js') }}"></script>
+</body>
+</html>

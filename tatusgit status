@@ -1,0 +1,135 @@
+[33mcommit a0d5f4202b128ca86bb9cda3ae10b1e4f75aae92[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 19:11:08 2025 +0530
+
+    🛡️ Add .gitignore to ignore secret file
+
+ .gitignore | Bin [31m68[m -> [32m72[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit dd3cc0fab571606e95c77ea25a7cde472c9298bc[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 18:58:14 2025 +0530
+
+    🔄 Updated HTML, JS, and Flask backend
+
+ __pycache__/app.cpython-312.pyc | Bin [31m15893[m -> [32m18229[m bytes
+ fixhub-vision-abf5b2d67e46.json |  13 [32m++++[m
+ instance/fixhub.db              | Bin [31m20480[m -> [32m20480[m bytes
+ reset_db.py                     |  13 [32m++++[m
+ static/hub.css                  |  39 [32m++++++++++[m
+ templates/faq.html              |  88 [32m++++++++++++++++++++++[m
+ templates/features.html         |  64 [32m++++++++++++++++[m
+ templates/hub.html              | 160 [32m+++++[m[31m-----------------------------------[m
+ templates/report.html           |  75 [32m+++++++++++++++++++[m
+ templates/track.html            |  47 [32m++++++++++++[m
+ 10 files changed, 359 insertions(+), 140 deletions(-)
+
+[33mcommit 2cea203f8d977ee96bc3469960981628cccfd7be[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 15:10:28 2025 +0530
+
+    🔧 Add temporary /reset-db route for issue cleanup
+
+ app.py | 10 [32m++++++++++[m
+ 1 file changed, 10 insertions(+)
+
+[33mcommit 434a7326620a70af1caa5bb021a3f029336b2f2d[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 14:51:18 2025 +0530
+
+    ➕ Added 3 new FAQ questions
+
+ templates/hub.html | 72 [32m+++++++++++++++++++++++++++++[m[31m-------------------------[m
+ 1 file changed, 39 insertions(+), 33 deletions(-)
+
+[33mcommit 8e3a3458c3cca70f8ab17fdb7cb113a48c975343[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 13:24:58 2025 +0530
+
+    ✅ Fix: Bind Flask to 0.0.0.0 for Render deployment
+
+ app.py | 42 [32m+++++++++++++++++++++++++++++++++++++++[m[31m---[m
+ 1 file changed, 39 insertions(+), 3 deletions(-)
+
+[33mcommit e7ad099d42240f2265074569ece243120e1ff703[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 13:14:38 2025 +0530
+
+    ✅ Update Vision API init to support Render deployment
+
+ test_vision.py | 243 [32m++++++++++++++++++++++[m[31m-----------------------------------[m
+ 1 file changed, 93 insertions(+), 150 deletions(-)
+
+[33mcommit 5a3c05ab6ff6013c23c417215a72d2437a54d219[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 12:49:27 2025 +0530
+
+    Add runtime.txt for Python version
+
+ runtime.txt | 1 [32m+[m
+ 1 file changed, 1 insertion(+)
+
+[33mcommit 77332a547b5a85e0d98935f78bce35929c825f6d[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 12:45:17 2025 +0530
+
+    Add requirements.txt
+
+ requirements.txt | Bin [31m0[m -> [32m1310[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 7b5686120fe0c27b14410c59e32e8b0c9b013229[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 12:28:59 2025 +0530
+
+    Add Render deployment file
+
+ render.yaml | 10 [32m++++++++++[m
+ 1 file changed, 10 insertions(+)
+
+[33mcommit 963f0cc4652ca2f4357a1ae35f7c77880fbe5086[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 12:18:41 2025 +0530
+
+    Add .gitignore to exclude secret file
+
+ .gitignore | Bin [31m134[m -> [32m68[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 9f30d75f30e269731e4f7c34b3ef094563f9dc92[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 12:05:18 2025 +0530
+
+    🔒 Remove secret JSON file and ignore it
+
+ .gitignore | Bin [31m0[m -> [32m134[m bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[33mcommit 731e120164ea33c192f791fa9de42477448b8a04[m
+Author: Deekshith KM <deeku00007@gmail.com>
+Date:   Tue Jun 17 11:55:21 2025 +0530
+
+    Initial FixHub commit
+
+ __pycache__/app.cpython-312.pyc         | Bin [31m0[m -> [32m15893[m bytes
+ __pycache__/test_vision.cpython-312.pyc | Bin [31m0[m -> [32m8221[m bytes
+ app.py                                  | 248 [32m+++++++++++++++++++++++++[m
+ extracted_text.txt                      |  18 [32m++[m
+ instance/fixhub.db                      | Bin [31m0[m -> [32m20480[m bytes
+ static/adh.jpg                          | Bin [31m0[m -> [32m18137[m bytes
+ static/dad.jpg                          | Bin [31m0[m -> [32m151212[m bytes
+ static/hub.css                          | 308 [32m++++++++++++++++++++++++++++++++[m
+ static/hub.js                           | 235 [32m++++++++++++++++++++++++[m
+ static/macha.jpg                        | Bin [31m0[m -> [32m65430[m bytes
+ static/uploads/IMG_6337.jpeg            | Bin [31m0[m -> [32m1242997[m bytes
+ static/uploads/IMG_6340.jpeg            | Bin [31m0[m -> [32m567100[m bytes
+ static/uploads/adh.jpg                  | Bin [31m0[m -> [32m18137[m bytes
+ static/uploads/dad.jpg                  | Bin [31m0[m -> [32m151212[m bytes
+ static/uploads/macha.jpg                | Bin [31m0[m -> [32m65430[m bytes
+ templates/hub.html                      | 161 [32m+++++++++++++++++[m
+ templates/login.html                    | 148 [32m+++++++++++++++[m
+ templates/pass.html                     | 112 [32m++++++++++++[m
+ test_vision.py                          | 240 [32m+++++++++++++++++++++++++[m
+ uploads/macha.jpg                       | Bin [31m0[m -> [32m65430[m bytes
+ 20 files changed, 1470 insertions(+)
