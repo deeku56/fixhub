@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FixHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}?v={{ time }}">
+
+  <!-- ✅ Leaflet.js for Interactive Maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <header class="hero">
+    <h1>FixHub</h1>
+    <p>Helping You Build a Better Neighbourhood</p>
+  </header>
+
+  <!-- 🚨 Guidelines Section -->
+  <section class="guidelines">
+    <h2>🚨 Community Guidelines</h2>
+    <div class="guidelines-card">
+      <ul>
+        <li>Please <strong>log out</strong> before closing the site.</li>
+        <li>Do <strong>not submit false reports</strong> or misuse the platform.</li>
+        <li>Only <strong>one upvote per issue</strong> is allowed per user.</li>
+        <li>This platform is for <strong>genuine civic issues</strong> only.</li>
+        <li>Provide clear and accurate <strong>location & description</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <nav class="navbar">
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#report">Report</a>
+    <a href="#track">Track</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" onclick="logout()" style="float: right; color: red; font-weight: bold;">Logout</a>
+  </nav>
+
+  <!-- ✅ About -->
+  <section id="about" class="about">
+    <h2>About FixHub</h2>
+    <p>FixHub is a community-driven civic issue reporting platform. Whether it's a broken light, a pothole, or a sanitation issue, we help your voice reach those who can act on it.</p>
+  </section>
+
+  <!-- ✅ Features -->
+  <section id="features" class="features">
+  <h2>Our Core Features</h2>
+  <div class="cards">
+    <div class="card"><h3>Quick Issue Reporting</h3><p>Report local issues in seconds using our guided form.</p></div>
+    <div class="card"><h3>Real-Time Status</h3><p>Track your issue from submission to resolution.</p></div>
+    <div class="card"><h3>Community Priority</h3><p>Upvote issues that matter most to your neighborhood.</p></div>
+    <div class="card"><h3>Transparency</h3><p>Stay informed. FixHub makes local governance more accountable.</p></div>
+
+    <!-- ✅ Your New Card -->
+    <div class="card">
+      <h3>Official Issue Management</h3>
+      <p>Government officials can log in to review and update issue statuses in real time.</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ✅ Report Section -->
+  <section id="report" class="report">
+    <h2>Report an Issue (with ID Verification)</h2>
+
+    <form id="verify-form" enctype="multipart/form-data" novalidate>
+      <label>Upload Aadhaar Image:</label>
+      <input type="file" name="aadhar" accept="image/*" required />
+      <label>Upload Second Proof (Voter ID, License, etc.):</label>
+      <input type="file" name="other_id" accept="image/*" required />
+      <button type="submit">Verify Identity</button>
+      <p id="verify-status"></p>
+    </form>
+
+    <form id="report-form" style="display: none;">
+      <label for="title">Issue Title:</label>
+      <input type="text" id="title" placeholder="Issue Title (e.g., Pothole on 4th Street)" required />
+
+      <label for="description">Describe the Issue:</label>
+      <textarea id="description" placeholder="Describe the issue..." maxlength="250" required></textarea>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" placeholder="Type manually OR select from the map" required />
+
+      <!-- 🕓 Map Loading Instruction -->
+      <p id="map-hint" style="font-size: 0.95rem; color: #666; margin-bottom: 0.5rem;">
+        🕓 If the map loads slowly, try dragging it to load tiles faster.
+      </p>
+
+      <!-- ✅ Interactive Map for Location Selection -->
+      <div id="map" style="height: 400px; width: 100%;"></div>
+
+      <!-- ✅ Hidden inputs to store selected coordinates -->
+      <input type="hidden" id="lat" name="latitude">
+      <input type="hidden" id="lng" name="longitude">
+
+      <label for="category">Category:</label>
+      <select id="category" required>
+        <option value="">Select Category</option>
+        <option value="pothole">Pothole</option>
+        <option value="light">Streetlight</option>
+        <option value="garbage">Garbage</option>
+        <option value="sanitation">Sanitation</option>
+      </select>
+
+      <button type="submit">Submit Report</button>
+    </form>
+  </section>
+
+  <!-- ✅ Track Issues -->
+  <section id="track" class="track">
+    <h2>Track Issues</h2>
+    <p class="disclaimer">
+      ⚠️ <strong>Before reporting:</strong> Please check if your issue already exists below.<br/>
+      If it does, <strong>upvote</strong> it to help prioritize.<br/>
+      If it's a new issue, fill out the form above to submit it.
+    </p>
+    <div id="issue-list" class="cards"> 
+      <!-- Issues will be added dynamically here -->
+    </div>
+  </section>
+
+  <!-- ✅ FAQ Section -->
+  <section id="faq" class="faq">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">What is FixHub?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        FixHub is a community-driven platform where citizens can report local issues like potholes, broken streetlights, and garbage.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-header">
+        <span class="faq-question">How do I report an issue?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        Simply submit a report with a description, images, and location using our interactive map.
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Footer -->
+  <footer>
+    <p>&copy; 2025 FixHub. Together, we fix better.</p>
+  </footer>
+
+  <!-- ✅ JavaScript -->
+  <script src="{{ url_for('static', filename='hub.js') }}"></script>
+</body>
+</html>

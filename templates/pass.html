@@ -1,0 +1,112 @@
+<!-- templates/reset-password.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reset Password | FixHub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f9ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .reset-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      color: #2b93d4;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;
+      background-color: #2b93d4;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    #reset-message {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #d9534f;
+    }
+
+    a {
+      display: block;
+      margin-top: 1rem;
+      text-decoration: none;
+      color: #2b93d4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="reset-container">
+    <h2>🔐 Reset Your Password</h2>
+
+    <form id="reset-form">
+      <input type="email" id="reset-email" placeholder="Enter your registered email" required />
+      <input type="password" id="new-password" placeholder="Enter new password" required />
+      <button type="submit">Reset Password</button>
+    </form>
+
+    <p id="reset-message"></p>
+
+    <a href="/login">← Back to Login</a>
+  </div>
+
+  <script>
+    document.getElementById("reset-form").addEventListener("submit", async function (e) {
+      e.preventDefault(); // ✅ Prevent default form reload
+
+      const email = document.getElementById("reset-email").value.trim();
+      const newPassword = document.getElementById("new-password").value.trim();
+      const message = document.getElementById("reset-message");
+
+      if (!email || !newPassword) {
+        message.textContent = "❌ Both fields required.";
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        message.textContent = "❌ Password must be at least 6 characters.";
+        return;
+      }
+
+      const res = await fetch("/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, new_password: newPassword })
+      });
+
+      const data = await res.json();
+      message.textContent = data.message;
+      message.style.color = res.ok ? "green" : "red";
+    });
+  </script>
+
+</body>
+</html>
