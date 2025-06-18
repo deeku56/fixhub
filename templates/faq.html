@@ -1,26 +1,15 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FAQ | FixHub</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- ✅ Dropdown Navbar -->
-  <nav class="navbar">
-    <div class="dropdown">
-      <button class="dropbtn">☰</button>
-      <div class="dropdown-content">
-        <a href="/">Home</a>
-        <a href="/features">Features</a>
-        <a href="/report">Report</a>
-        <a href="/track">Track</a>
-        <a href="/login" style="color: red;">Logout</a>
-      </div>
-    </div>
-  </nav>
+  {% include 'navbar.html' %}
 
   <header class="hero">
     <h1>❓ Frequently Asked Questions</h1>
@@ -79,9 +68,7 @@
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 FixHub. Together, we fix better.</p>
-  </footer>
+  {% include 'footer.html' %}
 
   <script src="{{ url_for('static', filename='hub.js') }}"></script>
 </body>

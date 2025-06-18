@@ -5,21 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Features | FixHub</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="dropdown">
-      <button class="dropbtn">☰</button>
-      <div class="dropdown-content">
-        <a href="/">Home</a>
-        <a href="/report">Report</a>
-        <a href="/track">Track</a>
-        <a href="/faq">FAQ</a>
-        <a href="/login" style="color: red;">Logout</a>
-      </div>
-    </div>
-  </nav>
+  {% include 'navbar.html' %}
 
   <header class="hero">
     <h1>FixHub Features</h1>
@@ -56,9 +46,10 @@
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 FixHub. Empowering Citizens.</p>
-  </footer>
+  {% include 'footer.html' %}
+
+  <!-- ✅ Add JS to enable hamburger functionality -->
+  <script src="{{ url_for('static', filename='hub.js') }}"></script>
 
 </body>
 </html>

@@ -1,18 +1,18 @@
-<!-- templates/reset-password.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reset Password | FixHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f5f9ff;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .reset-container {
@@ -23,6 +23,7 @@
       max-width: 400px;
       width: 100%;
       text-align: center;
+      margin: auto;
     }
 
     h2 {
@@ -64,6 +65,8 @@
 </head>
 <body>
 
+  {% include 'navbar.html' %}
+
   <div class="reset-container">
     <h2>🔐 Reset Your Password</h2>
 
@@ -78,9 +81,13 @@
     <a href="/login">← Back to Login</a>
   </div>
 
+    {% include 'footer.html' %}
+
+  <script src="{{ url_for('static', filename='hub.js') }}"></script>
+
   <script>
     document.getElementById("reset-form").addEventListener("submit", async function (e) {
-      e.preventDefault(); // ✅ Prevent default form reload
+      e.preventDefault();
 
       const email = document.getElementById("reset-email").value.trim();
       const newPassword = document.getElementById("new-password").value.trim();

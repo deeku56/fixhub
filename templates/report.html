@@ -5,23 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Report Issue | FixHub</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="dropdown">
-      <button class="dropbtn">☰</button>
-      <div class="dropdown-content">
-        <a href="/">Home</a>
-        <a href="/features">Features</a>
-        <a href="/track">Track</a>
-        <a href="/faq">FAQ</a>
-        <a href="/login" style="color: red;">Logout</a>
-      </div>
-    </div>
-  </nav>
+  {% include 'navbar.html' %}
 
   <header class="hero">
     <h1>📢 Report a Civic Issue</h1>
@@ -30,45 +20,59 @@
 
   <section class="report">
     <form id="verify-form" enctype="multipart/form-data" novalidate>
-      <label>Upload Aadhaar Image:</label>
-      <input type="file" name="aadhar" accept="image/*" required />
-      <label>Upload Second Proof (Voter ID, License, etc.):</label>
-      <input type="file" name="other_id" accept="image/*" required />
+      <div class="upload-section">
+        <label for="aadhar">Upload Aadhaar Image:</label>
+        <input type="file" id="aadhar" name="aadhar" accept="image/*" required />
+      </div>
+
+      <div class="upload-section">
+        <label for="other_id">Upload Second Proof (Voter ID, License, etc.):</label>
+        <input type="file" id="other_id" name="other_id" accept="image/*" required />
+      </div>
+
       <button type="submit">Verify Identity</button>
       <p id="verify-status"></p>
     </form>
 
     <form id="report-form" style="display: none;">
-      <label for="title">Issue Title:</label>
-      <input type="text" id="title" placeholder="Issue Title (e.g., Pothole on 4th Street)" required />
+      <div class="report-section">
+        <label for="title">Issue Title:</label>
+        <input type="text" id="title" placeholder="Issue Title (e.g., Pothole on 4th Street)" required />
+      </div>
 
-      <label for="description">Describe the Issue:</label>
-      <textarea id="description" placeholder="Describe the issue..." maxlength="250" required></textarea>
+      <div class="report-section">
+        <label for="description">Describe the Issue:</label>
+        <textarea id="description" placeholder="Describe the issue..." maxlength="250" required></textarea>
+      </div>
 
-      <label for="location">Location:</label>
-      <input type="text" id="location" placeholder="Type manually OR select from the map" required />
+      <div class="report-section">
+        <label for="location">Location:</label>
+        <input type="text" id="location" placeholder="Type manually OR select from the map" required />
+      </div>
 
+      <!-- ✅ Leaflet Map with User Tip -->
       <div id="map" style="height: 400px; width: 100%; margin-top: 10px;"></div>
+      <p class="map-tip">🗺️ Drag the map to load more areas faster!</p>
 
       <input type="hidden" id="lat" name="latitude">
       <input type="hidden" id="lng" name="longitude">
 
-      <label for="category">Category:</label>
-      <select id="category" required>
-        <option value="">Select Category</option>
-        <option value="pothole">Pothole</option>
-        <option value="light">Streetlight</option>
-        <option value="garbage">Garbage</option>
-        <option value="sanitation">Sanitation</option>
-      </select>
+      <div class="report-section">
+        <label for="category">Category:</label>
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="pothole">Pothole</option>
+          <option value="light">Streetlight</option>
+          <option value="garbage">Garbage</option>
+          <option value="sanitation">Sanitation</option>
+        </select>
+      </div>
 
       <button type="submit">Submit Report</button>
     </form>
   </section>
 
-  <footer>
-    <p>&copy; 2025 FixHub. Raise Your Voice, Report Your Issue.</p>
-  </footer>
+  {% include 'footer.html' %}
 
   <script src="{{ url_for('static', filename='hub.js') }}"></script>
 </body>

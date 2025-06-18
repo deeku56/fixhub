@@ -1,0 +1,17 @@
+<!-- templates/navbar.html -->
+<nav class="navbar">
+  <div class="dropdown">
+    <button class="dropbtn">☰</button>
+    <div class="dropdown-content">
+      <a href="/features">Features</a>
+      <a href="/report">Report</a>
+      <a href="/track">Track</a>
+      <a href="/faq">FAQ</a>
+      {% if current_user.is_authenticated %}
+        <a href="/logout" style="color: red;">Logout</a>
+      {% else %}
+        <a href="/login" style="color: red;">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

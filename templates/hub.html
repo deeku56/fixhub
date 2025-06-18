@@ -4,31 +4,46 @@
   <meta charset="UTF-8" />
   <title>FixHub - Home</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- ✅ FontAwesome for social media icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
+  <!-- ✅ Hamburger Navbar -->
   <nav class="navbar">
     <div class="dropdown">
       <button class="dropbtn">☰</button>
       <div class="dropdown-content">
-        <a href="/features">Features</a>
-        <a href="/report">Report</a>
-        <a href="/track">Track</a>
-        <a href="/faq">FAQ</a>
-        <a href="/login" style="color:red">Logout</a>
+        {% if current_user.is_authenticated %}
+          <a href="/features">Features</a>
+          <a href="/report">Report</a>
+          <a href="/track">Track</a>
+          <a href="/faq">FAQ</a>
+          <a href="/logout" style="color:red">Logout</a>
+        {% else %}
+          <a href="/login">Login</a>
+          <a href="#" onclick="alert('🔒 Please login first.')">Features</a>
+          <a href="#" onclick="alert('🔒 Please login first.')">Report</a>
+          <a href="#" onclick="alert('🔒 Please login first.')">Track</a>
+          <a href="#" onclick="alert('🔒 Please login first.')">FAQ</a>
+        {% endif %}
       </div>
     </div>
   </nav>
 
+  <!-- ✅ Header -->
   <header class="hero">
     <h1>FixHub</h1>
     <p>Helping You Build a Better Neighbourhood</p>
   </header>
 
+  <!-- ✅ About Section -->
   <section class="about">
     <h2>About FixHub</h2>
     <p>FixHub is a community-driven civic issue reporting platform. Whether it's a broken light, a pothole, or a sanitation issue, we help your voice reach those who can act on it.</p>
   </section>
 
+  <!-- ✅ Community Guidelines -->
   <section class="guidelines">
     <h2>🚨 Community Guidelines</h2>
     <div class="guidelines-card">
@@ -42,6 +57,28 @@
     </div>
   </section>
 
-  <footer><p>&copy; 2025 FixHub</p></footer>
+  <!-- ✅ Footer with social icons -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 FixHub. Together, we fix better.</p>
+      
+      <div class="follow-us">Follow Us:</div>
+      
+      <div class="social-icons">
+        <a href="https://github.com/deeku56" target="_blank" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/deekshith-km-b8931332a" target="_blank" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/your-handle" target="_blank" aria-label="Twitter">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ✅ JavaScript -->
+  <script src="{{ url_for('static', filename='hub.js') }}"></script>
 </body>
 </html>
