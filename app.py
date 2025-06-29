@@ -113,6 +113,10 @@ def public_about():
 def login_page():
     return render_template("login.html")
 
+@app.route("/register")
+def register_page():
+    return render_template("register.html")
+
 @app.route("/reset-password", methods=["GET", "POST"])
 def reset_password():
     if request.method == "POST":

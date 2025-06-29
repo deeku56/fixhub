@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login | FixHub</title>
+  <title>Register | FixHub</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='hub.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -15,7 +15,7 @@
       min-height: 100vh;
     }
 
-    .login-container {
+    .register-container {
       background: white;
       padding: 2rem;
       border-radius: 12px;
@@ -26,56 +26,40 @@
       margin: auto;
     }
 
-    .login-container h2 {
-      margin-bottom: 1rem;
-      color: #010a0f;
+    h2 {
+      color: #2b93d4;
     }
 
-    .login-container input {
+    input {
       width: 100%;
       padding: 0.8rem;
-      margin: 0.5rem 0;
+      margin: 1rem 0;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
     }
 
-    .forgot-password {
-      text-align: right;
-      margin: 0.3rem 0 1rem 0;
-    }
-
-    .forgot-password a {
-      font-size: 0.9rem;
-      color: #2b93d4;
-      text-decoration: none;
-    }
-
     button {
       padding: 0.8rem 1.5rem;
-      background-color: hsl(193, 70%, 52%);
+      background-color: #2b93d4;
       color: white;
       border: none;
       border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
-      margin: 0.5rem;
     }
 
-    #auth-status {
+    #register-message {
       margin-top: 1rem;
       font-weight: bold;
       color: #d9534f;
     }
 
-    .register-link {
+    a {
+      display: block;
       margin-top: 1rem;
-    }
-
-    .register-link a {
-      color: #2b93d4;
       text-decoration: none;
-      font-weight: bold;
+      color: #2b93d4;
     }
   </style>
 </head>
@@ -83,50 +67,55 @@
 
   {% include 'navbar.html' %}
 
-  <div class="login-container">
-    <h2>Login to FixHub</h2>
+  <div class="register-container">
+    <h2>📝 Create Your Account</h2>
 
-    <input type="email" id="auth-email" placeholder="Email" required />
-    <input type="password" id="auth-password" placeholder="Password" required />
+    <form id="register-form">
+      <input type="email" id="register-email" placeholder="Enter your email" required />
+      <input type="password" id="register-password" placeholder="Create a password" required />
+      <button type="submit">Register</button>
+    </form>
 
-    <div class="forgot-password">
-      <a href="/reset-password">Forgot Password?</a>
-    </div>
+    <p id="register-message"></p>
 
-    <button onclick="login()">Login</button>
-
-    <p id="auth-status"></p>
-
-    <div class="register-link">
-      Don't have an account? <a href="/register">Register</a>
-    </div>
+    <a href="/login">← Back to Login</a>
   </div>
 
   {% include 'footer.html' %}
 
   <script>
-    async function login() {
-      const email = document.getElementById("auth-email").value.trim();
-      const password = document.getElementById("auth-password").value.trim();
+    document.getElementById("register-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("register-email").value.trim();
+      const password = document.getElementById("register-password").value.trim();
+      const message = document.getElementById("register-message");
 
       if (!email || !password) {
-        document.getElementById("auth-status").textContent = "❌ Please enter email and password.";
+        message.textContent = "❌ Both fields required.";
         return;
       }
 
-      const res = await fetch("/login", {
+      if (!email.includes("@") || !email.includes(".")) {
+        message.textContent = "❌ Enter a valid email address.";
+        return;
+      }
+
+      if (password.length < 6) {
+        message.textContent = "❌ Password must be at least 6 characters.";
+        return;
+      }
+
+      const res = await fetch("/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
 
       const data = await res.json();
-      document.getElementById("auth-status").textContent = data.message;
-
-      if (res.ok) {
-        window.location.href = "/";
-      }
-    }
+      message.textContent = data.message;
+      message.style.color = res.ok ? "green" : "red";
+    });
   </script>
 
 </body>
